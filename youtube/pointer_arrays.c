@@ -14,6 +14,8 @@ int main()
   int *p = A;
   for (i = 0; i < 5; i++)
     {
+      printf ("print A %d\n",A);
+      printf ("pointer p %d\n",*(p+i));
       printf ("Address = %d\n", &A[i]);
       printf ("Address = %d\n", A + i);
       printf ("Value = %d\n", A[i]);
