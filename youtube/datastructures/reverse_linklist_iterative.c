@@ -13,10 +13,10 @@ struct Node *Reverse(struct Node *head)
     prev = NULL;
     while (current != NULL)
     {
-	next = current -> next;
-	current -> next = prev;
-	prev = current;
-	current = next;
+		next = current -> next;
+		current -> next = prev;
+		prev = current;
+		current = next;
     }
     head = prev;
     return head;
@@ -28,16 +28,16 @@ struct Node *Insert (struct Node *head, int data)
     temp -> next = NULL;
     if (head == NULL)
     {
-	head = temp;
+		head = temp;
     }
     else
     {
-	Node *temp1 = head;
-	while (temp1 -> next != NULL)
- 	{
-	    temp1 = temp1 -> next;
-	}
-	temp1 -> next = temp;
+		Node *temp1 = head;
+		while (temp1 -> next != NULL)
+ 		{
+	    	temp1 = temp1 -> next;
+		}
+		temp1 -> next = temp;
     }
     return head;
 }
@@ -46,8 +46,8 @@ void print(struct Node *head)
     Node *temp2 = head;
     while (temp2 != NULL)
     {
-	printf (" %d",temp2 -> data);
-	temp2 = temp2 -> next;
+		printf (" %d",temp2 -> data);
+		temp2 = temp2 -> next;
     }
     printf ("\n");
 }
@@ -63,9 +63,9 @@ int main()
     scanf ("%d",&n);
     for (int i = 0; i<n; i++)
     {   
-	int m;
-	printf ("Enter your integer : ");
-	scanf ("%d",&m);
+		int m;
+		printf ("Enter your integer : ");
+		scanf ("%d",&m);
         head = Insert(head,m);
     } 
     print(head);
