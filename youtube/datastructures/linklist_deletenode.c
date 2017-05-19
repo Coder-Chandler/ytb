@@ -7,9 +7,9 @@ struct Node
     struct Node *next;
 };
 struct Node *head;//Global
-void Insert(int data)//insert an integer at end of node
+struct Node *Insert(int data)//insert an integer at end of node
 {
-    struct Node *temp = (struct Node*)sizeof(struct Node));
+    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
     temp -> data = data;
     temp -> next = NULL;
     if (head == NULL) head = temp;
@@ -27,7 +27,7 @@ void print()//print all element in the list
     else
     {
 	Node *temp2 = head;
-	while (temp2 -> next != NULL)
+	while (temp2 != NULL)
         {
 	    printf (" %d",temp2 -> data);
 	    temp2 = temp2 -> next;
@@ -36,7 +36,23 @@ void print()//print all element in the list
     printf ("\n");
 }
 void Delete(int n)//delete node at position
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    Node *temp3 = head;
+    if (n == 1)
+    {
+	head = temp3 -> next;//head now points to second node 
+        free(temp3);
+        return;
+    }
+    int i;
+    for (i = 0; i<n-2; i++)
+    {
+	temp3 = temp3 -> next;//temp3 points to (n-1)th node
+    }
+    struct Node *temp4 = temp3 -> next;
+    temp3 -> next = temp4 -> next;
+    free(temp4);
+}
 int main()
 {
     head = NULL;
