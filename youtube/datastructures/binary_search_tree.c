@@ -41,7 +41,7 @@ bool Search(BstNode *root, int data)
 	{
 		return true;
 	}
-	else if (data <= root -> left)
+	else if (data <= root -> data)
 	{
 		return Search(root -> left, data);
 	}
@@ -52,7 +52,7 @@ bool Search(BstNode *root, int data)
 }
 int main()
 {
-	BstNode *root == NULL;//Creating an empty tree
+	BstNode *root = NULL;//Creating an empty tree
 	root = Insert(root, 5);
 	root = Insert(root, 10);
 	root = Insert(root, 20);
@@ -63,6 +63,6 @@ int main()
 	int number;
 	cout<<"Enter number be serched\n";
 	cin>>number;
-	if (Search(root, number) == true) cout<<"Founf\n";
+	if (Search(root, number) == true) cout<<"Found\n";
 	else cout<<"Not Found\n";	
 }
