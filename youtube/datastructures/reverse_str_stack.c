@@ -5,17 +5,6 @@
 #include <stack>
 #include <cstring>
 using namespace std;
-class Stack
-{
-	private:
-		char A[101];
-		int top;
-	public:
-		void Push(int x);
-		void Pop();
-		void Top();
-		bool IsEmpty();
-};
 void Reverse(char *C,int n)
 {
 	stack <char> S;
