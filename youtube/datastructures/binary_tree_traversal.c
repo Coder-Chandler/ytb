@@ -1,28 +1,32 @@
-//Binary Search Tree - Implementation in C++
+//Binary Search Tree - Implementation in C/C++
+#include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 #include <queue>
+#include <string>
 using namespace std;
 struct BstNode
 {
-	int data; 
+	//int data;
+	char data; 
 	BstNode *left;
 	BstNode *right;
 };
-BstNode *GetNewNode(int data)
+BstNode *GetNewNode(char data)
 {
 	BstNode *newNode = new BstNode();//BstNode *newNode = (struct BstNode*)malloc(sizeof(struct Node)
 	newNode -> data = data;
 	newNode -> left = newNode -> right = NULL;
 	return newNode;
 }
-BstNode *Insert(BstNode *root, int data)
+struct BstNode *Insert(struct BstNode *root, char data)
 {
 	if (root == NULL)//empty tree
 	{
 		root = GetNewNode(data);
 		return root;
 	}
-	else if (data <= root -> data)
+	else if (data <= root -> data 	)
 	{
 		root -> left = Insert(root -> left, data);
 	}
@@ -32,7 +36,7 @@ BstNode *Insert(BstNode *root, int data)
 	}
 	return root;
 }
-
+//Breadth-first
 void levelorder(struct BstNode *root)
 {
 	if (root == NULL) return;
@@ -53,9 +57,32 @@ void levelorder(struct BstNode *root)
 		}
 		Q.pop();//removing the element at front
 	}
-
 }
-bool Search(BstNode *root, int data)
+//Deepth-first-preorder traversal
+void preorder(struct BstNode *root)
+{
+	if (root == NULL) return;
+	printf ("%s ", root -> data);
+	preorder(root -> left);
+	preorder(root -> right);
+}
+//Deepth-first-Inorder traversal
+void inorder(struct BstNode *root)
+{
+	if (root == NULL) return;
+	inorder(root -> left);
+	printf ("%s ", root -> data);
+	inorder(root -> right);
+}
+//Deepth-first-postorder traversal
+void postorder(struct BstNode *root)
+{
+	if (root == NULL) return;
+	postorder(root -> left);
+	postorder(root -> right);
+	printf ("%s ", root -> data);
+}
+bool Search(BstNode *root, char data)
 {
 	if (root == NULL)
 	{
@@ -77,13 +104,16 @@ bool Search(BstNode *root, int data)
 int main()
 {
 	BstNode *root = NULL;//Creating an empty tree
-	root = Insert(root, 5);
-	root = Insert(root, 10);
-	root = Insert(root, 20);
-	root = Insert(root, 25);
-	root = Insert(root, 8);
-	root = Insert(root, 12);
+	root = Insert(root, "ROOT");
+	root = Insert(root, "Lx");
+	root = Insert(root, "Rx");
+	root = Insert(root, "SHILCC");
+	root = Insert(root, "Chandler");
+	root = Insert(root, "coder");
 	levelorder(root);
+	preorder(root);
+	inorder(root);
+	postorder(root);
 	cout<<"\n";
 	//Ask usr to enter a number
 	/*
