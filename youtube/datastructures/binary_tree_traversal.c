@@ -9,12 +9,13 @@ struct BstNode
 {
 	//int data;
 	char data; 
-	BstNode *left;
-	BstNode *right;
+	struct BstNode *left;
+	struct BstNode *right;
 };
-BstNode *GetNewNode(char data)
-{
-	BstNode *newNode = new BstNode();//BstNode *newNode = (struct BstNode*)malloc(sizeof(struct Node)
+struct BstNode *GetNewNode(char data)
+{	
+	//C++ -->BstNode *newNode = new BstNode();
+	BstNode *newNode = (struct BstNode*)malloc(sizeof(struct BstNode));	
 	newNode -> data = data;
 	newNode -> left = newNode -> right = NULL;
 	return newNode;
@@ -58,29 +59,29 @@ void levelorder(struct BstNode *root)
 		Q.pop();//removing the element at front
 	}
 }
-//Deepth-first-preorder traversal
+//Deepth-first-preorder traversal-<root><left><right>
 void preorder(struct BstNode *root)
 {
 	if (root == NULL) return;
-	printf ("%s ", root -> data);
+	printf ("%c ", root -> data);
 	preorder(root -> left);
 	preorder(root -> right);
 }
-//Deepth-first-Inorder traversal
+//Deepth-first-Inorder traversal-<left><root><right>
 void inorder(struct BstNode *root)
 {
 	if (root == NULL) return;
 	inorder(root -> left);
-	printf ("%s ", root -> data);
+	printf ("%c ", root -> data);
 	inorder(root -> right);
 }
-//Deepth-first-postorder traversal
+//Deepth-first-postorder traversal-<left><right><root>
 void postorder(struct BstNode *root)
 {
 	if (root == NULL) return;
 	postorder(root -> left);
 	postorder(root -> right);
-	printf ("%s ", root -> data);
+	printf ("%c ", root -> data);
 }
 bool Search(BstNode *root, char data)
 {
@@ -104,23 +105,33 @@ bool Search(BstNode *root, char data)
 int main()
 {
 	BstNode *root = NULL;//Creating an empty tree
-	root = Insert(root, "ROOT");
-	root = Insert(root, "Lx");
-	root = Insert(root, "Rx");
-	root = Insert(root, "SHILCC");
-	root = Insert(root, "Chandler");
-	root = Insert(root, "coder");
+	root = Insert(root, 'F');
+	root = Insert(root, 'D');
+	root = Insert(root, 'J');
+	root = Insert(root, 'B');
+	root = Insert(root, 'E');
+	root = Insert(root, 'G');
+	root = Insert(root, 'K');
+	root = Insert(root, 'A');
+	root = Insert(root, 'C');
+	root = Insert(root, 'I');
+	printf ("Levelorder-");
 	levelorder(root);
+	printf ("\n");
+	printf ("Preorder-");
 	preorder(root);
+	printf ("\n");
+	printf ("Inorder-");
 	inorder(root);
+	printf ("\n");
+	printf ("Postorder-");
 	postorder(root);
-	cout<<"\n";
+	printf ("\n");
 	//Ask usr to enter a number
-	/*
-	int number;
-	cout<<"Enter number be serched\n";
-	cin>>number;
-	if (Search(root, number) == true) cout<<"Found\n";
+	char data;
+	cout<<"Enter number be serched : ";
+	cin>>data;
+	if (Search(root, data) == true) cout<<"Found\n";
 	else cout<<"Not Found\n";	
-	*/
+	cout<<"\n";
 }
