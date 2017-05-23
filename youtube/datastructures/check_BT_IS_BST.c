@@ -1,10 +1,10 @@
 //Check if a binary tree is binary search tree or not
 #include <stdio.h>
 #include <stdlib.h>
+//#include <stdint.h>
 #include <iostream>
 #include <queue>
-#include <limits>
-#include <cstdint>
+#include <climits>
 using namespace std;
 struct BstNode
 {
@@ -60,13 +60,15 @@ void levelorder(struct BstNode *root)
 		Q.pop();//removing the element at front
 	}
 }
-bool IsBstUtil(struct BstNode *root, char minValue, char maxValue)
+bool IsBstUtil(struct BstNode *root, int minValue, int maxValue)
+/*因为INT_MIN, INT_MAX是正负无穷，所以我写了int但是我要执行的是char，按道理
+应该比较ascii码，但是最终没有输出bool值，大神帮我解惑*/
 {
 	if (root == NULL) return true;
 	if (root -> data > minValue && root -> data < maxValue
 		&& IsBstUtil(root -> left, minValue, root -> data)
 		&& IsBstUtil(root -> right, root -> data, maxValue))
-		return true;
+		return true;	
 	else return false;
 }
 bool IsBinarySearchTree(struct BstNode *root)
@@ -88,4 +90,7 @@ int main()
 	root = Insert(root, 'I');
 	printf ("Levelorder-");
 	levelorder(root);
+	printf ("\n");
+	IsBinarySearchTree(root);//这里没有按预期print出bool值
+	printf ("\n");
 }
