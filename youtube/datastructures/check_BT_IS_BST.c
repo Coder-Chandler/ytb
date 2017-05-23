@@ -3,59 +3,64 @@
 #include <stdlib.h>
 #include <iostream>
 #include <queue>
-struct BtNode
+#include <limits>
+#include <cstdint>
+using namespace std;
+struct BstNode
 {
-	char data;
-	struct Node *left;
-	struct Node *right;
+	//int data;
+	char data; 
+	struct BstNode *left;
+	struct BstNode *right;
+};
+struct BstNode *GetNewNode(char data)
+{	
+	//C++ -->BstNode *newNode = new BstNode();
+	BstNode *newNode = (struct BstNode*)malloc(sizeof(struct BstNode));	
+	newNode -> data = data;
+	newNode -> left = newNode -> right = NULL;
+	return newNode;
 }
-struct BtNode *GetNewNode(char data)
+struct BstNode *Insert(struct BstNode *root, char data)
 {
-	BtNode *newnode = (struct BtNode*)malloc(sizeof(struct BtNode));
-	newnode -> data = data;
-	newnode -> left = newnode -> right = NULL;
-	return newnode;
-}
-struct BtNode *Insert(struct BtNode *root, char data)
-{
-	if (root == NULL)
+	if (root == NULL)//empty tree
 	{
-		root = GetNewNode(char data);
+		root = GetNewNode(data);
 		return root;
 	}
-	else if (data <= root -> data)
+	else if (data <= root -> data 	)
 	{
-		root -> left = Insert(root -> left, char data);
+		root -> left = Insert(root -> left, data);
 	}
 	else
 	{
-		root -> right = Insert(root -> right, char data);
+		root -> right = Insert(root -> right, data);
 	}
 	return root;
 }
 //Breadth-first
-void levelorder(struct BtNode *root)
+void levelorder(struct BstNode *root)
 {
 	if (root == NULL) return;
-	queue <struct BtNode*> Q;
+	queue <struct BstNode*> Q;
 	Q.push(root);
 	//while there is at least one discovered node
 	while (!Q.empty())
 	{
-		struct BtNode *current = Q.front();
-		printf ("%c ", current -> data);
-		if (current -> left == NULL)
+		struct BstNode *current = Q.front();
+		cout<<current -> data<<" ";
+		if (current -> left != NULL)
 		{
 			Q.push(current -> left);
 		}
-		if (curent -> right == NULL)
+		if (current -> right != NULL)
 		{
 			Q.push(current -> right);
 		}
 		Q.pop();//removing the element at front
 	}
 }
-bool IsBstUtil(BtNode *root, char minValue, char maxValue)
+bool IsBstUtil(struct BstNode *root, char minValue, char maxValue)
 {
 	if (root == NULL) return true;
 	if (root -> data > minValue && root -> data < maxValue
@@ -64,13 +69,13 @@ bool IsBstUtil(BtNode *root, char minValue, char maxValue)
 		return true;
 	else return false;
 }
-bool IsBinarySearchTree(BtNode *root)
+bool IsBinarySearchTree(struct BstNode *root)
 {
 	return IsBstUtil(root, INT_MIN, INT_MAX);
 }
 int main()
 {
-	BtNode *root = NULL;//Creating an empty tree
+	struct BstNode *root = NULL;//Creating an empty tree
 	root = Insert(root, 'F');
 	root = Insert(root, 'D');
 	root = Insert(root, 'J');
