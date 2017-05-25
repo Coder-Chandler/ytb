@@ -44,7 +44,7 @@ struct Node *Delete(struct Node *root, int data)
 		{
 			struct Node *temp = FindMin(root -> right);//find the minimum node at right subtree
 			root -> data = temp -> data;
-			root -> right = Delete(root -> right, temp -> data;);
+			root -> right = Delete(root -> right, temp -> data);
 		}
 	}
 	return root;
@@ -52,21 +52,25 @@ struct Node *Delete(struct Node *root, int data)
 //Function to visit nodes in Inorder
 void Inorder(struct Node *root)
 {
-	if (root = NULL)
-	{
-		Inorder(root -> left);
-		printf ("%d", rot -> data);
-		Inorder(root -> right);
-	}
+	if (root == NULL) return;
+	Inorder(root -> left);
+	printf ("%d ", root -> data);
+	Inorder(root -> right);
+}
+struct Node *GetNewNode(int data)
+{
+	Node *newnode = (struct Node*)malloc(sizeof(struct Node));//C++ --> root = new Node();
+	newnode -> data = data;
+	newnode -> left = newnode -> right = NULL;
+	return newnode;
 }
 // Function to Insert Node in a Binary Search Tree
 struct Node *Insert(struct Node *root, int data)
 {
 	if (root == NULL)
 	{
-		Node *root = (struct Node*)malloc(sizeof(struct Node));//C++ --> root = new Node();
-		root -> data = data;
-		root -> left = root -> right = NULL;
+		root = GetNewNode(data);
+		return root;
 	}
 	else if (data <= root -> data)
 	{
@@ -93,12 +97,13 @@ int main()
 	root = Insert(root,3); root = Insert(root,4); 
 	root = Insert(root,1); root = Insert(root,11);
 	//print Nodes before we delete a node
-	printf ("Now Inorder : ")
-	Inorder(root)
+	printf ("Now-Inorder : ");
+	Inorder(root);
+	printf ("\n");
 	// Deleting node with value 5, change this value to test other cases
 	root = Delete(root,5);
 	//Print Nodes in Inorder after we delete 5
-	cout<<"Inorder: ";
+	printf("Delete-Inorder : ");
 	Inorder(root);
-	cout<<"\n";
+	printf ("\n");
 }
