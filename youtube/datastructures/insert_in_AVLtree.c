@@ -6,7 +6,7 @@ struct Node
 {
 	int key;
 	struct Node *left;
-	struct NOde *right;
+	struct Node *right;
 	int height;
 };
 //A utility fuction to get maximum of two integers
@@ -24,8 +24,9 @@ struct Node *GetNewNode(int key)
 {
 	struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));
 	newnode -> key = key;
-	newnode -> left = newnode -> right = NULL;
-	newnode -> height = 0;//new node is initially add at leaf
+	newnode -> left = NULL;
+	newnode -> right = NULL;
+	newnode -> height = 1;//new node is initially add at leaf
 	return newnode;
 } 
 //Autility function to right rotate subtree rooted with y;
@@ -43,10 +44,10 @@ struct Node *rightrotate(struct Node *y)// Right Rotate
 	return x;
 }
 //A utility function to left rotate subtree rooted with x
-struct Node leftrotate(struct Node *x)
+struct Node *leftrotate(struct Node *x)
 {
 	struct Node *y = x -> right;
-	struct Node T2 = y -> left;
+	struct Node *T2 = y -> left;
 	//preform rotation
 	y -> left = x;
 	x -> right = T2;
@@ -66,35 +67,46 @@ int getBalance(struct Node *N)
 struct Node *Insert(struct Node *node, int key)
 {
 	/* 1.perform the normal BST insertion*/
-	if (node == NULL) return GetNewNode(key);
-	if (key < node -> key)
-		node -> left = insert(node -> left, key);
+	
+	if (node == NULL) 
+		return GetNewNode(key);
+		
+	else if (key < node -> key)
+		node -> left = Insert(node -> left, key);
 	else if (key > node -> key)
-		node -> right = insert(node -> right, key);
-	else //equal keys are not allowed in BST
+		node -> right = Insert(node -> right, key);
+	else//equal keys are not allowed in BST	
 		return node;
+		
 	/* 2.update height of this ancestor node */
-	node -> height = 1 + max(height(node ->left), height(node -> right));
+	
+	node -> height = 1 + max(height(node -> left), height(node -> right));
+	
 	/* 3. Get the balance factors of this ancestors node to check whether this node became unbalance */
-	int balance = getbalance(node);
+	
+	int balance = getBalance(node);
+	
 	//if this node becomes unbalance, then there 4 cases !
-	//LEFT LEFT CASE
-	if (balance > 1 && key < node -> left -> key);
+	
+	//1.LEFT LEFT CASE
+	if (balance > 1 && key < node -> left -> key)
 		return rightrotate(node);
-	//RIGHT RIGHT CASE
+	//2.RIGHT RIGHT CASE
 	if (balance < -1 && key > node -> right -> key)
-		return leftrotate;
-	//LEFT RIGHT CASE
-	if (balance > 1 && key > node -> right -> key)
-	{	root -> left = leftrotate(node -> left);
+		return leftrotate(node);
+	//3.LEFT RIGHT CASE
+	if (balance > 1 && key > node -> left -> key)
+	{	
+		node -> left = leftrotate(node -> left);
 		return rightrotate(node);
 	}
-	//RIGHT LEFT CASE
+	//4.RIGHT LEFT CASE
 	if (balance < -1 && key < node -> right -> key)
 	{
 		node -> right = rightrotate(node -> right);
 		return leftrotate(node);
 	}
+	
 	/* return the (unchanged) Node pointers */
 	return node;
 }
@@ -117,7 +129,7 @@ int main()
 	root = Insert(root, 10);
 	root = Insert(root, 20);
 	root = Insert(root, 30);
-	root = Insert(root, 10);
+	root = Insert(root, 50);
 	root = Insert(root, 40);
 	root = Insert(root, 25);
 	/* the Constructed AVL tree would be
@@ -129,6 +141,7 @@ int main()
 	*/
 	printf ("Preorder traversal of the constructed AVL TREE is : \n");
 	preorder(root);
+	printf ("\n");
 	return 0;
 }
 
