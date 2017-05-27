@@ -122,9 +122,10 @@ struct Node *Insert(struct Node *node, int key)
 struct Node *deleteNode(struct Node *root, int key)
 {
 	//STEP 1 : PERFORM STANDARD BST DELETE
-	if (root == NULL) return root;
+	if (root == NULL) 
+		return root;
 	//if the key to be deleted is smaller than the root's key,then it lies in left subtree
-	if (key < root -> key)
+	else if (key < root -> key)
 		root -> left = deleteNode(root -> left, key);
 	//if the key to be deleted is greater than the root's key,then it lies in right subtree
 	else if (key > root -> key)
@@ -135,19 +136,21 @@ struct Node *deleteNode(struct Node *root, int key)
 	{
 		//case 1. node with no child
 		if (root -> left == NULL && root -> right == NULL)
+		{
 			free(root);
 			root = NULL;
+		}
 		//case 2. node with one child
-		if (root -> left == NULL)
+		else if (root -> left == NULL)
 		{
 			struct Node *temp0 = root;
-			root = root -> left;
+			root = root -> right;
 			free(temp0);
 		}
-		if (root -> right == NULL)
+		else if (root -> right == NULL)
 		{
 			struct Node *temp1 = root;
-			root = root -> right;
+			root = root -> left;
 			free(temp1);
 		}
 		//case 3. node with two children
@@ -228,7 +231,7 @@ int main()
 	   /    / \
      -1	   2   6
 	*/
-	printf ("Preorder traversal of the constructed AVL TREE is : \n");
+	printf ("\nPreorder traversal of the constructed AVL TREE is : \n");
 	preorder(root);
 	printf ("\n");
 	root = deleteNode(root, 10);
@@ -241,9 +244,9 @@ int main()
 	          / \
      	     2   6
     */
-    printf ("\npreorder traversal after delete of 10 \n");
+    printf ("\npreorder traversal after delete of 10 : \n");
     preorder(root);
-    printf ("\n");
+    printf ("\n\n");
 	return 0;
 }
 
