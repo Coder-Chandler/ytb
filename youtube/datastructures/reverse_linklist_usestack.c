@@ -30,11 +30,11 @@ void Insert(int data)
 		temp1 -> next = temp;
 	}
 }
-void Reverse()
+void Reverse(struct Node *p)
 {
-	if (head == NULL) return;
+	if (p == NULL) return;
 	stack<struct Node*>S;
-	struct Node *temp3 = head;
+	struct Node *temp3 = p;
 	while (temp3 != NULL)
 	{
 		S.push(temp3);
@@ -72,7 +72,7 @@ int main()
 	Insert(5);
 	Insert(9);
 	print();
-	Reverse();
+	Reverse(head);
 	printf ("Reverse-");
 	print();
 	printf ("\n");
