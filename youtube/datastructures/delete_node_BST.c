@@ -25,7 +25,7 @@ struct Node *Delete(struct Node *root, int data)
 		if (root -> left == NULL && root -> right == NULL)//case 1 : no child
 		{
 			free(root);//C++ --> delete root;
-			root == NULL;
+			root = NULL;
 		}
 		//case 2 : one child
 		else if (root -> left == NULL)
