@@ -6,10 +6,11 @@ struct Node
     int data;
     struct Node *next;
 };
-struct Node *Reverse(struct Node *head)
+struct Node *head;
+void Reverse(struct Node *p)
 {
     struct Node *current, *prev, *next;
-    current = head;
+    current = p;
     prev = NULL;
     while (current != NULL)
     {
@@ -19,7 +20,6 @@ struct Node *Reverse(struct Node *head)
 		current = next;
     }
     head = prev;
-    return head;
 }
 struct Node *Insert (struct Node *head, int data)
 {
@@ -53,7 +53,7 @@ void print(struct Node *head)
 }
 int main()
 {
-    struct Node *head = NULL;//Local variable
+    head = NULL;//Local variable
     //head = Insert(head,2);
     //head = Insert(head,4);
     //head = Insert(head,6);
@@ -69,6 +69,6 @@ int main()
         head = Insert(head,m);
     } 
     print(head);
-    head = Reverse(head);
+    Reverse(head);
     print(head);   
 }
