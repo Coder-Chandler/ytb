@@ -45,12 +45,14 @@ void Print()
 {
 	struct Node *temp2 = top;
 	if (top == NULL) return;
-	printf ("stack : ");
+	printf ("stack :");
+	printf ("top->");
 	while (temp2 != NULL)
 	{
-		printf (" %d", temp2 -> data);
+		printf (" %d->", temp2 -> data);
 		temp2 = temp2 -> link;
 	}
+	printf ("NULL");
 	printf ("\n");
 }
 void Reverse()
@@ -86,12 +88,14 @@ int main()
 	Push(10);Print();
 	Pop(); Print();
 	Push(12); Print();
-	Reverse(); ReversePrint();
+	printf("Reverse-");
+	Reverse(); Print();
 	Push(11); Print();
 	Push(17); Print();
 	Push(19); Print();
 	Pop(); Print();
-	Reverse(); ReversePrint();
+	printf("Reverse-");
+	Reverse(); Print();
 	printf ("\n");	
 }
 
