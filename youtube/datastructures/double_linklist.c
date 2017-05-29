@@ -29,6 +29,22 @@ void InsertAtHead(int x)
 	newNode -> next = head;
 	head = newNode;
 }
+void delete_begin()
+{
+	while (head != NULL)
+	{
+		struct Node *temp = head;
+		if (temp -> next == NULL)
+		{
+			head = NULL;
+			free(temp);
+			return;
+		}
+		temp -> next -> prev = NULL;
+		head = temp -> next;
+		free(temp);
+	}
+}
 void Print()
 {
 	struct Node *temp = head;
@@ -65,6 +81,12 @@ int main()
 	InsertAtHead(2);Print();ReversePrint();
 	InsertAtHead(4);Print();ReversePrint();
 	InsertAtHead(7);Print();ReversePrint();
+	InsertAtHead(8);Print();ReversePrint();
+	InsertAtHead(3);Print();ReversePrint();
+	delete_begin();
+	InsertAtHead(9);Print();ReversePrint();
+	InsertAtHead(6);Print();ReversePrint();
+	InsertAtHead(5);Print();ReversePrint();
 	printf ("\n");
 }
 	
