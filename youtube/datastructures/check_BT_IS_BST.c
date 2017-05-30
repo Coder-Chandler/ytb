@@ -61,8 +61,6 @@ void levelorder(struct BstNode *root)
 	}
 }
 bool IsBstUtil(struct BstNode *root, int minValue, int maxValue)
-/*因为INT_MIN, INT_MAX是正负无穷，所以我写了int但是我要执行的是char，按道理
-应该比较ascii码，但是最终没有输出bool值，大神帮我解惑*/
 {
 	if (root == NULL) return true;
 	if (root -> data > minValue && root -> data < maxValue
@@ -91,6 +89,6 @@ int main()
 	printf ("Levelorder-");
 	levelorder(root);
 	printf ("\n");
-	IsBinarySearchTree(root);//这里没有按预期print出bool值
+	IsBinarySearchTree(root);
 	printf ("\n");
 }
