@@ -1,13 +1,13 @@
 //Binary Search Tree - Implementation in C/C++
 #include <stdio.h>
 #include <stdlib.h>
-#include <iostream>
+//#include <iostream>
 #include <queue>
-#include <string>
+//#include <string>
 using namespace std;
 struct BstNode
 {
-	//int data;
+	int data0;
 	char data; 
 	struct BstNode *left;
 	struct BstNode *right;
@@ -47,7 +47,7 @@ void levelorder(struct BstNode *root)
 	while (!Q.empty())
 	{
 		struct BstNode *current = Q.front();
-		cout<<current -> data<<" ";
+		printf ("%c ", current -> data);
 		if (current -> left != NULL)
 		{
 			Q.push(current -> left);
@@ -129,9 +129,9 @@ int main()
 	printf ("\n");
 	//Ask usr to enter a number
 	char data;
-	cout<<"Enter number be serched : ";
-	cin>>data;
-	if (Search(root, data) == true) cout<<"Found\n";
-	else cout<<"Not Found\n";	
-	cout<<"\n";
+	printf ("Enter number be serched : ");
+	scanf ("%c",&data);
+	if (Search(root, data) == true) printf ("Found");
+	else printf ("Not Found");	
+	printf ("\n");
 }
