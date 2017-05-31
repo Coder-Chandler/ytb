@@ -89,7 +89,8 @@ bool Search(BstNode *root, char data)
 	{
 		return false;
 	}
-	else if (root -> data == data)
+	printf ("%c ", root -> data);//Track the search path
+	if (root -> data == data)
 	{
 		return true;
 	}
@@ -102,6 +103,7 @@ bool Search(BstNode *root, char data)
 		return Search(root -> right, data);
 	}	
 }
+
 int main()
 {
 	BstNode *root = NULL;//Creating an empty tree
