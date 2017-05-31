@@ -76,19 +76,23 @@ bool IsBinarySearchTree(struct BstNode *root)
 int main()
 {
 	struct BstNode *root = NULL;//Creating an empty tree
-	root = Insert(root, 'F');
-	root = Insert(root, 'D');
-	root = Insert(root, 'J');
-	root = Insert(root, 'B');
-	root = Insert(root, 'E');
 	root = Insert(root, 'G');
-	root = Insert(root, 'K');
+	root = Insert(root, 'D');
+	root = Insert(root, 'P');
 	root = Insert(root, 'A');
-	root = Insert(root, 'C');
-	root = Insert(root, 'I');
+	root = Insert(root, 'E');
+	root = Insert(root, 'O');
+	root = Insert(root, 'R');
+	root = Insert(root, 'Y');
+	root = Insert(root, 'Z');
+	//root = Insert(root, 'I');
+	//root = Insert(root, 'X');
+	//root = Insert(root, 'Z');
+	//root = Insert(root, 'Y');
 	printf ("Levelorder-");
 	levelorder(root);
 	printf ("\n");
-	IsBinarySearchTree(root);
+	bool b = IsBinarySearchTree(root);
+	printf ("%s" ,b == false ? "false":"true");
 	printf ("\n");
 }
