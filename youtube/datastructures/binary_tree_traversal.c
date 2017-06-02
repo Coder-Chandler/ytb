@@ -7,27 +7,28 @@
 using namespace std;
 struct BstNode
 {
-	int data0;
-	char data; 
+	int data;
+	//char data; 
 	struct BstNode *left;
 	struct BstNode *right;
 };
-struct BstNode *GetNewNode(char data)
+struct BstNode *GetNewNode(int data)
 {	
 	//C++ -->BstNode *newNode = new BstNode();
 	BstNode *newNode = (struct BstNode*)malloc(sizeof(struct BstNode));	
 	newNode -> data = data;
-	newNode -> left = newNode -> right = NULL;
+	newNode -> left = NULL;
+	newNode -> right = NULL;
 	return newNode;
 }
-struct BstNode *Insert(struct BstNode *root, char data)
+struct BstNode *Insert(struct BstNode *root, int data)
 {
 	if (root == NULL)//empty tree
 	{
 		root = GetNewNode(data);
 		return root;
 	}
-	else if (data <= root -> data 	)
+	else if (data <= root -> data)
 	{
 		root -> left = Insert(root -> left, data);
 	}
@@ -47,7 +48,7 @@ void levelorder(struct BstNode *root)
 	while (!Q.empty())
 	{
 		struct BstNode *current = Q.front();
-		printf ("%c ", current -> data);
+		printf ("%d ", current -> data);
 		if (current -> left != NULL)
 		{
 			Q.push(current -> left);
@@ -63,7 +64,7 @@ void levelorder(struct BstNode *root)
 void preorder(struct BstNode *root)
 {
 	if (root == NULL) return;
-	printf ("%c ", root -> data);
+	printf ("%d ", root -> data);
 	preorder(root -> left);
 	preorder(root -> right);
 }
@@ -72,7 +73,7 @@ void inorder(struct BstNode *root)
 {
 	if (root == NULL) return;
 	inorder(root -> left);
-	printf ("%c ", root -> data);
+	printf ("%d ", root -> data);
 	inorder(root -> right);
 }
 //Deepth-first-postorder traversal-<left><right><root>
@@ -81,15 +82,15 @@ void postorder(struct BstNode *root)
 	if (root == NULL) return;
 	postorder(root -> left);
 	postorder(root -> right);
-	printf ("%c ", root -> data);
+	printf ("%d ", root -> data);
 }
-bool Search(BstNode *root, char data)
+bool Search(BstNode *root, int data)
 {
 	if (root == NULL)
 	{
 		return false;
 	}
-	printf ("%c ", root -> data);//Track the search path
+	printf ("%d ", root -> data);//Track the search path
 	if (root -> data == data)
 	{
 		return true;
@@ -106,17 +107,17 @@ bool Search(BstNode *root, char data)
 
 int main()
 {
-	BstNode *root = NULL;//Creating an empty tree
-	root = Insert(root, 'F');
-	root = Insert(root, 'D');
-	root = Insert(root, 'J');
-	root = Insert(root, 'B');
-	root = Insert(root, 'E');
-	root = Insert(root, 'G');
-	root = Insert(root, 'K');
-	root = Insert(root, 'A');
-	root = Insert(root, 'C');
-	root = Insert(root, 'I');
+	struct BstNode *root = NULL;//Creating an empty tree
+	root = Insert(root, 1);
+	root = Insert(root, 2);
+	root = Insert(root, 3);
+	root = Insert(root, 4);
+	root = Insert(root, 5);
+	root = Insert(root, 6);
+	root = Insert(root, 7);
+	root = Insert(root, 8);
+	root = Insert(root, 9);
+	//root = Insert(root, 'I');
 	printf ("Levelorder-");
 	levelorder(root);
 	printf ("\n");
@@ -130,9 +131,9 @@ int main()
 	postorder(root);
 	printf ("\n");
 	//Ask usr to enter a number
-	char data;
+	int data;
 	printf ("Enter number be serched : ");
-	scanf ("%c",&data);
+	scanf ("%d",&data);
 	if (Search(root, data) == true) printf ("Found");
 	else printf ("Not Found");	
 	printf ("\n");
