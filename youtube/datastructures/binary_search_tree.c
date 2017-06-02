@@ -1,5 +1,7 @@
 //Binary Search Tree - Implementation in C++
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 using namespace std;
 struct BstNode
 {
@@ -31,6 +33,14 @@ BstNode *Insert(BstNode *root, int data)
 	}
 	return root;
 }
+//Deepth-first-preorder traversal-<root><left><right>
+void preorder(struct BstNode *root)
+{
+	if (root == NULL) return;
+	printf ("%d ", root -> data);
+	preorder(root -> left);
+	preorder(root -> right);
+}
 bool Search(BstNode *root, int data)
 {
 	if (root == NULL)
@@ -53,12 +63,17 @@ bool Search(BstNode *root, int data)
 int main()
 {
 	BstNode *root = NULL;//Creating an empty tree
+	root = Insert(root, 1);
+	root = Insert(root, 2);
+	root = Insert(root, 3);
+	root = Insert(root, 4);
 	root = Insert(root, 5);
-	root = Insert(root, 10);
-	root = Insert(root, 20);
-	root = Insert(root, 25);
+	root = Insert(root, 6);
+	root = Insert(root, 7);
 	root = Insert(root, 8);
-	root = Insert(root, 12);
+	root = Insert(root, 9);
+	preorder(root);
+	printf ("\n");
 	//Ask usr to enter a number
 	int number;
 	cout<<"Enter number be serched\n";
